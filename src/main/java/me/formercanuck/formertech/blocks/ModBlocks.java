@@ -7,5 +7,8 @@ public class ModBlocks {
     public static CopperBlock COPPERBLOCK;
 
     @ObjectHolder("formertech:tinblock")
-    public static CopperBlock TINBLOCK;
+    public static TinBlock TINBLOCK;
+
+    @ObjectHolder("formertech:silverblock")
+    public static SilverBlock SILVERBLOCK;
 }

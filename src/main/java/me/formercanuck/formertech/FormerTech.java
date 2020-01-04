@@ -2,6 +2,7 @@ package me.formercanuck.formertech;
 
 import me.formercanuck.formertech.blocks.CopperBlock;
 import me.formercanuck.formertech.blocks.ModBlocks;
+import me.formercanuck.formertech.blocks.SilverBlock;
 import me.formercanuck.formertech.blocks.TinBlock;
 import me.formercanuck.formertech.setup.ClientProxy;
 import me.formercanuck.formertech.setup.IProxy;
@@ -41,12 +42,14 @@ public class FormerTech {
         public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
             blockRegistryEvent.getRegistry().register(new CopperBlock());
             blockRegistryEvent.getRegistry().register(new TinBlock());
+            blockRegistryEvent.getRegistry().register(new SilverBlock());
         }
 
         @SubscribeEvent
         public static void onItemsRegistry(final RegistryEvent.Register<Item> itemRegistryEvent) {
             itemRegistryEvent.getRegistry().register(new BlockItem(ModBlocks.COPPERBLOCK, new Item.Properties()).setRegistryName("copperblock"));
             itemRegistryEvent.getRegistry().register(new BlockItem(ModBlocks.TINBLOCK, new Item.Properties()).setRegistryName("tinblock"));
+            itemRegistryEvent.getRegistry().register(new BlockItem(ModBlocks.SILVERBLOCK, new Item.Properties()).setRegistryName("silverblock"));
         }
     }
 }

@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "formertech:block/copperblock"
+        "all": "formertech:block/silverblock"
     }
 }
