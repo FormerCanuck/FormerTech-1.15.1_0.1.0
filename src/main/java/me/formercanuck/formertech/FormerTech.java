@@ -1,9 +1,6 @@
 package me.formercanuck.formertech;
 
-import me.formercanuck.formertech.blocks.CopperBlock;
 import me.formercanuck.formertech.blocks.ModBlocks;
-import me.formercanuck.formertech.blocks.SilverBlock;
-import me.formercanuck.formertech.blocks.TinBlock;
 import me.formercanuck.formertech.setup.ClientProxy;
 import me.formercanuck.formertech.setup.IProxy;
 import me.formercanuck.formertech.setup.ServerProxy;
@@ -28,7 +25,6 @@ public class FormerTech {
     private static final Logger LOGGER = LogManager.getLogger();
 
     public FormerTech() {
-        // Register the setup method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
     }
 
@@ -40,16 +36,36 @@ public class FormerTech {
     public static class RegistryEvents {
         @SubscribeEvent
         public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
-            blockRegistryEvent.getRegistry().register(new CopperBlock());
-            blockRegistryEvent.getRegistry().register(new TinBlock());
-            blockRegistryEvent.getRegistry().register(new SilverBlock());
+            blockRegistryEvent.getRegistry().register(ModBlocks.COPPERBLOCK);
+            blockRegistryEvent.getRegistry().register(ModBlocks.COPPERORE);
+
+            blockRegistryEvent.getRegistry().register(ModBlocks.TINBLOCK);
+            blockRegistryEvent.getRegistry().register(ModBlocks.TINORE);
+
+            blockRegistryEvent.getRegistry().register(ModBlocks.SILVERBLOCK);
+            blockRegistryEvent.getRegistry().register(ModBlocks.SILVERORE);
+
+            blockRegistryEvent.getRegistry().register(ModBlocks.LEADBLOCK);
+            blockRegistryEvent.getRegistry().register(ModBlocks.LEADORE);
         }
 
         @SubscribeEvent
         public static void onItemsRegistry(final RegistryEvent.Register<Item> itemRegistryEvent) {
-            itemRegistryEvent.getRegistry().register(new BlockItem(ModBlocks.COPPERBLOCK, new Item.Properties()).setRegistryName("copperblock"));
-            itemRegistryEvent.getRegistry().register(new BlockItem(ModBlocks.TINBLOCK, new Item.Properties()).setRegistryName("tinblock"));
-            itemRegistryEvent.getRegistry().register(new BlockItem(ModBlocks.SILVERBLOCK, new Item.Properties()).setRegistryName("silverblock"));
+            registerBlockItem(ModBlocks.COPPERBLOCK, itemRegistryEvent);
+            registerBlockItem(ModBlocks.COPPERORE, itemRegistryEvent);
+
+            registerBlockItem(ModBlocks.TINBLOCK, itemRegistryEvent);
+            registerBlockItem(ModBlocks.TINORE, itemRegistryEvent);
+
+            registerBlockItem(ModBlocks.SILVERBLOCK, itemRegistryEvent);
+            registerBlockItem(ModBlocks.SILVERORE, itemRegistryEvent);
+
+            registerBlockItem(ModBlocks.LEADBLOCK, itemRegistryEvent);
+            registerBlockItem(ModBlocks.LEADORE, itemRegistryEvent);
+        }
+
+        private static void registerBlockItem(Block block, final RegistryEvent.Register<Item> itemRegister) {
+            itemRegister.getRegistry().register(new BlockItem(block, new Item.Properties()).setRegistryName(block.getRegistryName()));
         }
     }
 }
