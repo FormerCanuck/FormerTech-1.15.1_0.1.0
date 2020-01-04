@@ -1,34 +1,27 @@
 {
   "variants": {
-    "facing=north,lit=false": {
+    "facing=north": {
       "model": "formertech:block/crusherblock"
     },
-    "facing=south,lit=false": {
+    "facing=south": {
       "model": "formertech:block/crusherblock",
       "y": 180
     },
-    "facing=west,lit=false": {
+    "facing=west": {
       "model": "formertech:block/crusherblock",
       "y": 270
     },
-    "facing=east,lit=false": {
+    "facing=east": {
       "model": "formertech:block/crusherblock",
       "y": 90
     },
-    "facing=north,lit=true": {
-      "model": "formertech:block/crusherblock_on"
+    "facing=up" : {
+      "model": "formertech:block/crusherblock",
+      "x": -90
     },
-    "facing=south,lit=true": {
-      "model": "formertech:block/crusherblock_on",
-      "y": 180
-    },
-    "facing=west,lit=true": {
-      "model": "formertech:block/crusherblock_on",
-      "y": 270
-    },
-    "facing=east,lit=true": {
-      "model": "formertech:block/crusherblock_on",
-      "y": 90
+    "facing=down": {
+      "model": "formertech:block/crusherblock",
+      "x": 90
     }
   }
 }

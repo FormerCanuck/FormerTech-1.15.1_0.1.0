@@ -1,5 +1,5 @@
 {
     "variants": {
-        "": {"model": "formertech:block/leadore"}
+        "": {"model": "formertech:block/ores/leadore"}
     }
 }

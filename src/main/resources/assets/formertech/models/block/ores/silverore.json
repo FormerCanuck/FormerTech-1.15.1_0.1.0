@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "formertech:block/tinore"
+        "all": "formertech:block/ores/silverore"
     }
 }

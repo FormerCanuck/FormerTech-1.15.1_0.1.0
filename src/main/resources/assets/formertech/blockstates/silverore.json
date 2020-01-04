@@ -1,5 +1,5 @@
 {
     "variants": {
-        "": {"model": "formertech:block/silverore"}
+        "": {"model": "formertech:block/ores/silverore"}
     }
 }

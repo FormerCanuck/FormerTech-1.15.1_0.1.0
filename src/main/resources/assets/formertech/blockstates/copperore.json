@@ -1,5 +1,5 @@
 {
     "variants": {
-        "": {"model": "formertech:block/copperore"}
+        "": {"model": "formertech:block/ores/copperore"}
     }
 }

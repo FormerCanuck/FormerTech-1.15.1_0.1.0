@@ -1,8 +1,11 @@
 {
-  "parent": "block/orientable",
+  "parent": "block/cube",
   "textures": {
-    "top": "formertech:block/machine_sides",
-    "front": "formertech:block/crusher_front_off",
-    "side": "formertech:block/machine_sides"
+    "down": "formertech:block/machine_sides",
+    "up": "formertech:block/machine_sides",
+    "east": "formertech:block/machine_sides",
+    "west": "formertech:block/machine_sides",
+    "north": "formertech:block/crusher_front_off",
+    "south": "formertech:block/machine_sides"
   }
 }

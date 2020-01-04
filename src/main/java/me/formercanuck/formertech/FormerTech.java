@@ -1,6 +1,8 @@
 package me.formercanuck.formertech;
 
+import me.formercanuck.formertech.blocks.CrusherTile;
 import me.formercanuck.formertech.blocks.ModBlocks;
+import me.formercanuck.formertech.items.ModItems;
 import me.formercanuck.formertech.setup.ClientProxy;
 import me.formercanuck.formertech.setup.IProxy;
 import me.formercanuck.formertech.setup.ModSetup;
@@ -8,6 +10,7 @@ import me.formercanuck.formertech.setup.ServerProxy;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
@@ -59,9 +62,11 @@ public class FormerTech {
         public static void onItemsRegistry(final RegistryEvent.Register<Item> itemRegistryEvent) {
             registerBlockItem(ModBlocks.COPPERBLOCK, itemRegistryEvent);
             registerBlockItem(ModBlocks.COPPERORE, itemRegistryEvent);
+            itemRegistryEvent.getRegistry().register(ModItems.COPPERINGOT);
 
             registerBlockItem(ModBlocks.TINBLOCK, itemRegistryEvent);
             registerBlockItem(ModBlocks.TINORE, itemRegistryEvent);
+            itemRegistryEvent.getRegistry().register(ModItems.TININGOT);
 
             registerBlockItem(ModBlocks.SILVERBLOCK, itemRegistryEvent);
             registerBlockItem(ModBlocks.SILVERORE, itemRegistryEvent);
@@ -70,6 +75,11 @@ public class FormerTech {
             registerBlockItem(ModBlocks.LEADORE, itemRegistryEvent);
 
             registerBlockItem(ModBlocks.CRUSHERBLOCK, itemRegistryEvent);
+        }
+
+        @SubscribeEvent
+        public static void onTileEntityRegistry(final RegistryEvent.Register<TileEntityType<?>> event) {
+            event.getRegistry().register(TileEntityType.Builder.create(CrusherTile::new, ModBlocks.CRUSHERBLOCK).build(null).setRegistryName("crusherblock"));
         }
 
         private static void registerBlockItem(Block block, final RegistryEvent.Register<Item> itemRegister) {
