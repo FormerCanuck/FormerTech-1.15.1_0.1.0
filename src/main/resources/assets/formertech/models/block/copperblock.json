@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "particle": "formertech:block/copperblock",
+        "all": "formertech:block/copperblock"
+    }
+}
