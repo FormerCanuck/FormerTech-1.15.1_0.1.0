@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "particle": "formertech:block/tinblock",
+        "all": "formertech:block/tinblock"
+    }
+}
