@@ -3,6 +3,7 @@ package me.formercanuck.formertech;
 import me.formercanuck.formertech.blocks.ModBlocks;
 import me.formercanuck.formertech.setup.ClientProxy;
 import me.formercanuck.formertech.setup.IProxy;
+import me.formercanuck.formertech.setup.ModSetup;
 import me.formercanuck.formertech.setup.ServerProxy;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
@@ -22,6 +23,8 @@ public class FormerTech {
 
     public static IProxy proxy = DistExecutor.runForDist(() -> () -> new ClientProxy(), () -> () -> new ServerProxy());
 
+    public static ModSetup setup = new ModSetup();
+
     private static final Logger LOGGER = LogManager.getLogger();
 
     public FormerTech() {
@@ -29,7 +32,8 @@ public class FormerTech {
     }
 
     private void setup(final FMLCommonSetupEvent event) {
-
+        setup.init();
+        proxy.init();
     }
 
     @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -47,6 +51,8 @@ public class FormerTech {
 
             blockRegistryEvent.getRegistry().register(ModBlocks.LEADBLOCK);
             blockRegistryEvent.getRegistry().register(ModBlocks.LEADORE);
+
+            blockRegistryEvent.getRegistry().register(ModBlocks.CRUSHERBLOCK);
         }
 
         @SubscribeEvent
@@ -62,10 +68,13 @@ public class FormerTech {
 
             registerBlockItem(ModBlocks.LEADBLOCK, itemRegistryEvent);
             registerBlockItem(ModBlocks.LEADORE, itemRegistryEvent);
+
+            registerBlockItem(ModBlocks.CRUSHERBLOCK, itemRegistryEvent);
         }
 
         private static void registerBlockItem(Block block, final RegistryEvent.Register<Item> itemRegister) {
-            itemRegister.getRegistry().register(new BlockItem(block, new Item.Properties()).setRegistryName(block.getRegistryName()));
+            Item.Properties properties = new Item.Properties().group(setup.itemGroup);
+            itemRegister.getRegistry().register(new BlockItem(block, properties).setRegistryName(block.getRegistryName()));
         }
     }
 }

@@ -1,0 +1,8 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "top": "formertech:block/machine_sides",
+    "front": "formertech:block/crusher_front_off",
+    "side": "formertech:block/machine_sides"
+  }
+}

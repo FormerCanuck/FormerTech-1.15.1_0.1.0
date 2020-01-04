@@ -1,13 +1,14 @@
 {
+  "_comment": "Block",
   "block.formertech.copperblock": "Copper Block",
   "block.formertech.copperore": "Copper Ore",
-
   "block.formertech.tinblock": "Tin Block",
   "block.formertech.tinore": "Tin Ore",
-
   "block.formertech.silverblock": "Silver Block",
   "block.formertech.silverore": "Silver Ore",
-
   "block.formertech.leadblock": "Lead Block",
-  "block.formertech.leadore": "Lead Ore"
+  "block.formertech.leadore": "Lead Ore",
+
+  "_comment": "Creative Tabs",
+  "itemGroup.formertech": "FormerTech"
 }

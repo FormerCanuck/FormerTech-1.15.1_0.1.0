@@ -3,6 +3,7 @@ package me.formercanuck.formertech.blocks;
 import net.minecraftforge.registries.ObjectHolder;
 
 public class ModBlocks {
+    ////////////////////////////// BLOCKS //////////////////////////////
     @ObjectHolder("formertech:copperblock")
     public static BaseBlock COPPERBLOCK = new BaseBlock("copperblock");
 
@@ -26,4 +27,10 @@ public class ModBlocks {
 
     @ObjectHolder("formertech:leadore")
     public static BaseOre LEADORE = new BaseOre("leadore");
+    ////////////////////////////// BLOCKS //////////////////////////////
+
+    ////////////////////////////// MACHINES //////////////////////////////
+    @ObjectHolder("formertech:crusherblock")
+    public static CrusherBlock CRUSHERBLOCK = new CrusherBlock();
+    ////////////////////////////// MACHINES //////////////////////////////
 }
