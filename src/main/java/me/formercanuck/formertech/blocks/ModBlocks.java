@@ -1,5 +1,6 @@
 package me.formercanuck.formertech.blocks;
 
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.registries.ObjectHolder;
 
@@ -36,5 +37,8 @@ public class ModBlocks {
 
     @ObjectHolder("formertech:crusherblock")
     public static TileEntityType<CrusherTile> CRUSHER_TILE;
+
+    @ObjectHolder("formertech:crusherblock")
+    public static ContainerType<CrusherContainer> CRUSHER_CONTAINER;
     ////////////////////////////// MACHINES //////////////////////////////
 }
