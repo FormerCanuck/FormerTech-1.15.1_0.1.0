@@ -1,5 +1,6 @@
 {
   "_comment": "Block",
+
   "block.formertech.copperblock": "Copper Block",
   "block.formertech.copperore": "Copper Ore",
 
@@ -11,6 +12,9 @@
 
   "block.formertech.leadblock": "Lead Block",
   "block.formertech.leadore": "Lead Ore",
+  
+  "block.formertech.crusherblock": "Crusher",
+  "block.formertech.furnacegenerator": "Furnace Generator",
 
   "_comment": "Items",
   "item.formertech.copperingot": "Copper Ingot",

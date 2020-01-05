@@ -40,5 +40,14 @@ public class ModBlocks {
 
     @ObjectHolder("formertech:crusherblock")
     public static ContainerType<CrusherContainer> CRUSHER_CONTAINER;
+
+    @ObjectHolder("formertech:furnacegenerator")
+    public static FurnaceGeneratorBlock FURNACEGENERATORBLOCK = new FurnaceGeneratorBlock();
+
+    @ObjectHolder("formertech:furnacegenerator")
+    public static TileEntityType<FurnaceGeneratorTile> FURNACEGENERATOR_TILE;
+
+    @ObjectHolder("formertech:furnacegenerator")
+    public static ContainerType<FurnaceGeneratorContainer> FURNACEGENERATOR_CONTAINER;
     ////////////////////////////// MACHINES //////////////////////////////
 }

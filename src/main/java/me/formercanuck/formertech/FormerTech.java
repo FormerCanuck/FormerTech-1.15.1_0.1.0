@@ -1,8 +1,6 @@
 package me.formercanuck.formertech;
 
-import me.formercanuck.formertech.blocks.CrusherContainer;
-import me.formercanuck.formertech.blocks.CrusherTile;
-import me.formercanuck.formertech.blocks.ModBlocks;
+import me.formercanuck.formertech.blocks.*;
 import me.formercanuck.formertech.items.ModItems;
 import me.formercanuck.formertech.setup.ClientProxy;
 import me.formercanuck.formertech.setup.IProxy;
@@ -62,6 +60,7 @@ public class FormerTech {
             blockRegistryEvent.getRegistry().register(ModBlocks.LEADORE);
 
             blockRegistryEvent.getRegistry().register(ModBlocks.CRUSHERBLOCK);
+            blockRegistryEvent.getRegistry().register(ModBlocks.FURNACEGENERATORBLOCK);
         }
 
         @SubscribeEvent
@@ -81,11 +80,13 @@ public class FormerTech {
             registerBlockItem(ModBlocks.LEADORE, itemRegistryEvent);
 
             registerBlockItem(ModBlocks.CRUSHERBLOCK, itemRegistryEvent);
+            registerBlockItem(ModBlocks.FURNACEGENERATORBLOCK, itemRegistryEvent);
         }
 
         @SubscribeEvent
         public static void onTileEntityRegistry(final RegistryEvent.Register<TileEntityType<?>> event) {
             event.getRegistry().register(TileEntityType.Builder.create(CrusherTile::new, ModBlocks.CRUSHERBLOCK).build(null).setRegistryName("crusherblock"));
+            event.getRegistry().register(TileEntityType.Builder.create(FurnaceGeneratorTile::new, ModBlocks.FURNACEGENERATORBLOCK).build(null).setRegistryName("furnacegenerator"));
         }
 
         @SubscribeEvent
@@ -94,6 +95,11 @@ public class FormerTech {
                 BlockPos pos = data.readBlockPos();
                 return new CrusherContainer(windowId, FormerTech.proxy.getClientWorld(), pos, inv, FormerTech.proxy.getClientPlayer());
             }).setRegistryName("crusherblock"));
+
+            event.getRegistry().register(IForgeContainerType.create((windowId, inv, data) -> {
+                BlockPos pos = data.readBlockPos();
+                return new FurnaceGeneratorContainer(windowId, FormerTech.proxy.getClientWorld(), pos, inv, FormerTech.proxy.getClientPlayer());
+            }).setRegistryName("furnacegenerator"));
         }
 
         private static void registerBlockItem(Block block, final RegistryEvent.Register<Item> itemRegister) {
