@@ -1,4 +1,4 @@
-package me.formercanuck.formertech.blocks;
+package me.formercanuck.formertech.blocks.generators;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -18,18 +18,20 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.ILightReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 
-public class CrusherBlock extends Block {
+public class FurnaceGeneratorBlock extends Block {
 
-    public CrusherBlock() {
+    public FurnaceGeneratorBlock() {
         super(Properties.create(Material.IRON)
                 .sound(SoundType.METAL)
-                .hardnessAndResistance(2.0f));
-        setRegistryName("crusherblock");
+                .hardnessAndResistance(2.0f)
+                .lightValue(5));
+        setRegistryName("furnacegenerator");
     }
 
     @Override
@@ -37,10 +39,15 @@ public class CrusherBlock extends Block {
         return true;
     }
 
+    @Override
+    public int getLightValue(BlockState state, ILightReader world, BlockPos pos) {
+        return state.get(BlockStateProperties.POWERED) ? super.getLightValue(state, world, pos) : 0;
+    }
+
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return new CrusherTile();
+        return new FurnaceGeneratorTile();
     }
 
     @Override
@@ -69,6 +76,6 @@ public class CrusherBlock extends Block {
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         super.fillStateContainer(builder);
-        builder.add(BlockStateProperties.FACING);
+        builder.add(BlockStateProperties.FACING, BlockStateProperties.POWERED);
     }
 }

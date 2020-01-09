@@ -1,27 +1,16 @@
 {
   "variants": {
-    "facing=north": {
-      "model": "formertech:block/crusherblock"
-    },
-    "facing=south": {
-      "model": "formertech:block/crusherblock",
-      "y": 180
-    },
-    "facing=west": {
-      "model": "formertech:block/crusherblock",
-      "y": 270
-    },
-    "facing=east": {
-      "model": "formertech:block/crusherblock",
-      "y": 90
-    },
-    "facing=up" : {
-      "model": "formertech:block/crusherblock",
-      "x": -90
-    },
-    "facing=down": {
-      "model": "formertech:block/crusherblock",
-      "x": 90
-    }
+    "facing=north,powered=false": { "model": "formertech:block/crusherblock" },
+    "facing=south,powered=false": { "model": "formertech:block/crusherblock", "y": 180 },
+    "facing=east,powered=false": { "model": "formertech:block/crusherblock", "y": 90},
+    "facing=up,powered=false" : { "model": "formertech:block/crusherblock", "x": -90},
+    "facing=west,powered=false": { "model": "formertech:block/crusherblock", "y": 270},
+    "facing=down,powered=false": { "model": "formertech:block/crusherblock", "x": 90},
+    "facing=north,powered=true": { "model": "formertech:block/crusherblock_powered" },
+    "facing=south,powered=true": { "model": "formertech:block/crusherblock_powered", "y": 180 },
+    "facing=west,powered=true": { "model": "formertech:block/crusherblock_powered", "y": 270},
+    "facing=east,powered=true": { "model": "formertech:block/crusherblock_powered", "y": 90},
+    "facing=up,powered=true" : { "model": "formertech:block/crusherblock_powered", "x": -90},
+    "facing=down,powered=true": { "model": "formertech:block/crusherblock_powered", "x": 90}
   }
 }

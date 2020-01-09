@@ -1,5 +1,14 @@
 package me.formercanuck.formertech.blocks;
 
+import me.formercanuck.formertech.blocks.crushers.CrusherBlock;
+import me.formercanuck.formertech.blocks.crushers.CrusherContainer;
+import me.formercanuck.formertech.blocks.crushers.CrusherTile;
+import me.formercanuck.formertech.blocks.furnaces.PoweredFurnaceBlock;
+import me.formercanuck.formertech.blocks.furnaces.PoweredFurnaceContainer;
+import me.formercanuck.formertech.blocks.furnaces.PoweredFurnaceTile;
+import me.formercanuck.formertech.blocks.generators.FurnaceGeneratorBlock;
+import me.formercanuck.formertech.blocks.generators.FurnaceGeneratorContainer;
+import me.formercanuck.formertech.blocks.generators.FurnaceGeneratorTile;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.registries.ObjectHolder;
@@ -40,6 +49,15 @@ public class ModBlocks {
 
     @ObjectHolder("formertech:crusherblock")
     public static ContainerType<CrusherContainer> CRUSHER_CONTAINER;
+
+    @ObjectHolder("formertech:poweredfurnace")
+    public static PoweredFurnaceBlock POWEREDFURNACE = new PoweredFurnaceBlock();
+
+    @ObjectHolder("formertech:poweredfurnace")
+    public static TileEntityType<PoweredFurnaceTile> POWEREDFURNACE_TILE;
+
+    @ObjectHolder("formertech:poweredfurnace")
+    public static ContainerType<PoweredFurnaceContainer> POWEREDFURNACE_CONTAINER;
 
     @ObjectHolder("formertech:furnacegenerator")
     public static FurnaceGeneratorBlock FURNACEGENERATORBLOCK = new FurnaceGeneratorBlock();

@@ -1,4 +1,4 @@
-package me.formercanuck.formertech.blocks;
+package me.formercanuck.formertech.blocks.crushers;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -23,13 +23,13 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 
-public class FurnaceGeneratorBlock extends Block {
+public class CrusherBlock extends Block {
 
-    public FurnaceGeneratorBlock() {
+    public CrusherBlock() {
         super(Properties.create(Material.IRON)
                 .sound(SoundType.METAL)
                 .hardnessAndResistance(2.0f));
-        setRegistryName("furnacegenerator");
+        setRegistryName("crusherblock");
     }
 
     @Override
@@ -40,7 +40,7 @@ public class FurnaceGeneratorBlock extends Block {
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return new FurnaceGeneratorTile();
+        return new CrusherTile();
     }
 
     @Override
@@ -69,6 +69,6 @@ public class FurnaceGeneratorBlock extends Block {
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         super.fillStateContainer(builder);
-        builder.add(BlockStateProperties.FACING);
+        builder.add(BlockStateProperties.FACING, BlockStateProperties.POWERED);
     }
 }

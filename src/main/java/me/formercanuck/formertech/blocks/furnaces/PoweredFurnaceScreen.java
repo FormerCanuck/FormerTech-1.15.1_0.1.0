@@ -1,4 +1,4 @@
-package me.formercanuck.formertech.blocks;
+package me.formercanuck.formertech.blocks.furnaces;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import me.formercanuck.formertech.FormerTech;
@@ -8,11 +8,11 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
-public class CrusherScreen extends ContainerScreen<CrusherContainer> {
+public class PoweredFurnaceScreen extends ContainerScreen<PoweredFurnaceContainer> {
 
     private ResourceLocation GUI = new ResourceLocation(FormerTech.MODID, "textures/gui/crusher_gui.png");
 
-    public CrusherScreen(CrusherContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
+    public PoweredFurnaceScreen(PoweredFurnaceContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
     }
 
@@ -25,14 +25,13 @@ public class CrusherScreen extends ContainerScreen<CrusherContainer> {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-//        drawString(Minecraft.getInstance().fontRenderer, "Energy: " + container.getEnergy(), 10, 10, 0xffffff);
-        drawString(Minecraft.getInstance().fontRenderer, "Crusher", 6, 6, 0xffffff);
+        drawString(Minecraft.getInstance().fontRenderer, "Energy: " + container.getEnergy(), 16, 16, 0xffffff);
+        drawString(Minecraft.getInstance().fontRenderer, "Powered Furnace", 6, 6, 0xffffff);
     }
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         GlStateManager.func_227637_a_(1.0F, 1.0F, 1.0F, 1.0F);
-//        GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.minecraft.getTextureManager().bindTexture(GUI);
         int relX = (this.width - this.xSize) / 2;
         int relY = (this.height - this.ySize) / 2;

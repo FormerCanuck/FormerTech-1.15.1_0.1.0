@@ -1,6 +1,12 @@
 package me.formercanuck.formertech;
 
-import me.formercanuck.formertech.blocks.*;
+import me.formercanuck.formertech.blocks.ModBlocks;
+import me.formercanuck.formertech.blocks.crushers.CrusherContainer;
+import me.formercanuck.formertech.blocks.crushers.CrusherTile;
+import me.formercanuck.formertech.blocks.furnaces.PoweredFurnaceContainer;
+import me.formercanuck.formertech.blocks.furnaces.PoweredFurnaceTile;
+import me.formercanuck.formertech.blocks.generators.FurnaceGeneratorContainer;
+import me.formercanuck.formertech.blocks.generators.FurnaceGeneratorTile;
 import me.formercanuck.formertech.items.ModItems;
 import me.formercanuck.formertech.setup.ClientProxy;
 import me.formercanuck.formertech.setup.IProxy;
@@ -16,9 +22,12 @@ import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLPaths;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -35,7 +44,13 @@ public class FormerTech {
     private static final Logger LOGGER = LogManager.getLogger();
 
     public FormerTech() {
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT_CONFIG);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);
+
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+
+        Config.loadConfig(Config.CLIENT_CONFIG, FMLPaths.CONFIGDIR.get().resolve("formertech-client.toml"));
+        Config.loadConfig(Config.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve("formertech-common.toml"));
     }
 
     private void setup(final FMLCommonSetupEvent event) {
@@ -60,6 +75,7 @@ public class FormerTech {
             blockRegistryEvent.getRegistry().register(ModBlocks.LEADORE);
 
             blockRegistryEvent.getRegistry().register(ModBlocks.CRUSHERBLOCK);
+            blockRegistryEvent.getRegistry().register(ModBlocks.POWEREDFURNACE);
             blockRegistryEvent.getRegistry().register(ModBlocks.FURNACEGENERATORBLOCK);
         }
 
@@ -80,12 +96,14 @@ public class FormerTech {
             registerBlockItem(ModBlocks.LEADORE, itemRegistryEvent);
 
             registerBlockItem(ModBlocks.CRUSHERBLOCK, itemRegistryEvent);
+            registerBlockItem(ModBlocks.POWEREDFURNACE, itemRegistryEvent);
             registerBlockItem(ModBlocks.FURNACEGENERATORBLOCK, itemRegistryEvent);
         }
 
         @SubscribeEvent
         public static void onTileEntityRegistry(final RegistryEvent.Register<TileEntityType<?>> event) {
             event.getRegistry().register(TileEntityType.Builder.create(CrusherTile::new, ModBlocks.CRUSHERBLOCK).build(null).setRegistryName("crusherblock"));
+            event.getRegistry().register(TileEntityType.Builder.create(PoweredFurnaceTile::new, ModBlocks.POWEREDFURNACE).build(null).setRegistryName("poweredfurnace"));
             event.getRegistry().register(TileEntityType.Builder.create(FurnaceGeneratorTile::new, ModBlocks.FURNACEGENERATORBLOCK).build(null).setRegistryName("furnacegenerator"));
         }
 
@@ -95,6 +113,11 @@ public class FormerTech {
                 BlockPos pos = data.readBlockPos();
                 return new CrusherContainer(windowId, FormerTech.proxy.getClientWorld(), pos, inv, FormerTech.proxy.getClientPlayer());
             }).setRegistryName("crusherblock"));
+
+            event.getRegistry().register(IForgeContainerType.create((windowId, inv, data) -> {
+                BlockPos pos = data.readBlockPos();
+                return new PoweredFurnaceContainer(windowId, FormerTech.proxy.getClientWorld(), pos, inv, FormerTech.proxy.getClientPlayer());
+            }).setRegistryName("poweredfurnace"));
 
             event.getRegistry().register(IForgeContainerType.create((windowId, inv, data) -> {
                 BlockPos pos = data.readBlockPos();

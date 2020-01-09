@@ -1,21 +1,26 @@
-package me.formercanuck.formertech.blocks;
+package me.formercanuck.formertech.blocks.generators;
 
+import me.formercanuck.formertech.blocks.ModBlocks;
+import me.formercanuck.formertech.tools.CustomEnergyStorage;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.tileentity.AbstractFurnaceTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IWorldPosCallable;
+import net.minecraft.util.IntReferenceHolder;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
-public class CrusherContainer extends Container {
+public class FurnaceGeneratorContainer extends Container {
 
     private TileEntity tileEntity;
 
@@ -23,24 +28,38 @@ public class CrusherContainer extends Container {
 
     private IItemHandler playerInventory;
 
-    public CrusherContainer(int id, World world, BlockPos pos, PlayerInventory playerInventory, PlayerEntity playerEntity) {
-        super(ModBlocks.CRUSHER_CONTAINER, id);
+    public FurnaceGeneratorContainer(int id, World world, BlockPos pos, PlayerInventory playerInventory, PlayerEntity playerEntity) {
+        super(ModBlocks.FURNACEGENERATOR_CONTAINER, id);
         tileEntity = world.getTileEntity(pos);
         this.player = playerEntity;
         this.playerInventory = new InvWrapper(playerInventory);
 
-
         tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h -> {
-            addSlot(new SlotItemHandler(h, 0, 57, 35));
-            addSlot(new SlotItemHandler(h, 1, 112, 31));
+            addSlot(new SlotItemHandler(h, 0, 80, 33));
         });
 
         layoutPlayerInventorySlots(8, 84);
+
+        trackInt(new IntReferenceHolder() {
+            @Override
+            public int get() {
+                return getEnergy();
+            }
+
+            @Override
+            public void set(int i) {
+                tileEntity.getCapability(CapabilityEnergy.ENERGY).ifPresent(h -> ((CustomEnergyStorage) h).setEnergy(i));
+            }
+        });
+    }
+
+    public int getEnergy() {
+        return tileEntity.getCapability(CapabilityEnergy.ENERGY).map(IEnergyStorage::getEnergyStored).orElse(0);
     }
 
     @Override
     public boolean canInteractWith(PlayerEntity playerIn) {
-        return isWithinUsableDistance(IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos()), player, ModBlocks.CRUSHERBLOCK);
+        return isWithinUsableDistance(IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos()), player, ModBlocks.FURNACEGENERATORBLOCK);
     }
 
     @Override
@@ -56,7 +75,7 @@ public class CrusherContainer extends Container {
                 }
                 slot.onSlotChange(stack, itemstack);
             } else {
-                if (stack.getItem() == Items.DIAMOND) {
+                if (AbstractFurnaceTileEntity.isFuel(stack)) {
                     if (!this.mergeItemStack(stack, 0, 1, false)) {
                         return ItemStack.EMPTY;
                     }

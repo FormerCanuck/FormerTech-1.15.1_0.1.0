@@ -1,12 +1,14 @@
-package me.formercanuck.formertech.blocks;
+package me.formercanuck.formertech.blocks.crushers;
 
-import me.formercanuck.formertech.tools.CustomEnergyStorage;
+import me.formercanuck.formertech.blocks.BaseOre;
+import me.formercanuck.formertech.blocks.ModBlocks;
+import me.formercanuck.formertech.tools.CustomEnergyMachine;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.AbstractFurnaceTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IWorldPosCallable;
 import net.minecraft.util.IntReferenceHolder;
@@ -19,7 +21,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
-public class FurnaceGeneratorContainer extends Container {
+public class CrusherContainer extends Container {
 
     private TileEntity tileEntity;
 
@@ -27,17 +29,11 @@ public class FurnaceGeneratorContainer extends Container {
 
     private IItemHandler playerInventory;
 
-    public FurnaceGeneratorContainer(int id, World world, BlockPos pos, PlayerInventory playerInventory, PlayerEntity playerEntity) {
-        super(ModBlocks.FURNACEGENERATOR_CONTAINER, id);
+    public CrusherContainer(int id, World world, BlockPos pos, PlayerInventory playerInventory, PlayerEntity playerEntity) {
+        super(ModBlocks.CRUSHER_CONTAINER, id);
         tileEntity = world.getTileEntity(pos);
         this.player = playerEntity;
         this.playerInventory = new InvWrapper(playerInventory);
-
-        tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h -> {
-            addSlot(new SlotItemHandler(h, 0, 80, 33));
-        });
-
-        layoutPlayerInventorySlots(8, 84);
 
         trackInt(new IntReferenceHolder() {
             @Override
@@ -47,9 +43,17 @@ public class FurnaceGeneratorContainer extends Container {
 
             @Override
             public void set(int i) {
-                tileEntity.getCapability(CapabilityEnergy.ENERGY).ifPresent(h -> ((CustomEnergyStorage) h).setEnergy(i));
+                tileEntity.getCapability(CapabilityEnergy.ENERGY).ifPresent(h -> ((CustomEnergyMachine) h).setEnergy(i));
             }
         });
+
+
+        tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h -> {
+            addSlot(new SlotItemHandler(h, 0, 57, 35));
+            addSlot(new SlotItemHandler(h, 1, 112, 31));
+        });
+
+        layoutPlayerInventorySlots(8, 84);
     }
 
     public int getEnergy() {
@@ -58,7 +62,7 @@ public class FurnaceGeneratorContainer extends Container {
 
     @Override
     public boolean canInteractWith(PlayerEntity playerIn) {
-        return isWithinUsableDistance(IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos()), player, ModBlocks.FURNACEGENERATORBLOCK);
+        return isWithinUsableDistance(IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos()), player, ModBlocks.CRUSHERBLOCK);
     }
 
     @Override
@@ -74,7 +78,7 @@ public class FurnaceGeneratorContainer extends Container {
                 }
                 slot.onSlotChange(stack, itemstack);
             } else {
-                if (AbstractFurnaceTileEntity.isFuel(stack)) {
+                if (Block.getBlockFromItem(stack.getItem()) instanceof BaseOre) {
                     if (!this.mergeItemStack(stack, 0, 1, false)) {
                         return ItemStack.EMPTY;
                     }

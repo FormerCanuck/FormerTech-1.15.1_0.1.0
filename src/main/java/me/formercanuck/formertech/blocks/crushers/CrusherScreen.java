@@ -1,4 +1,4 @@
-package me.formercanuck.formertech.blocks;
+package me.formercanuck.formertech.blocks.crushers;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import me.formercanuck.formertech.FormerTech;
@@ -8,11 +8,11 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
-public class FurnaceGeneratorScreen extends ContainerScreen<FurnaceGeneratorContainer> {
+public class CrusherScreen extends ContainerScreen<CrusherContainer> {
 
-    private ResourceLocation GUI = new ResourceLocation(FormerTech.MODID, "textures/gui/furnace_generator_gui.png");
+    private ResourceLocation GUI = new ResourceLocation(FormerTech.MODID, "textures/gui/crusher_gui.png");
 
-    public FurnaceGeneratorScreen(FurnaceGeneratorContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
+    public CrusherScreen(CrusherContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
     }
 
@@ -26,7 +26,7 @@ public class FurnaceGeneratorScreen extends ContainerScreen<FurnaceGeneratorCont
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
         drawString(Minecraft.getInstance().fontRenderer, "Energy: " + container.getEnergy(), 16, 16, 0xffffff);
-        drawString(Minecraft.getInstance().fontRenderer, "Furnace Generator", 6, 6, 0xffffff);
+        drawString(Minecraft.getInstance().fontRenderer, "Crusher", 6, 6, 0xffffff);
     }
 
     @Override

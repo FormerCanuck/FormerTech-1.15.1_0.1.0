@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "formertech:block/furnace_generator",
+    "down": "formertech:block/furnace_generator",
+    "up": "formertech:block/furnace_generator",
+    "east": "formertech:block/furnace_generator_sides",
+    "west": "formertech:block/furnace_generator_sides",
+    "north": "formertech:block/furnace_generator_front_on",
+    "south": "formertech:block/furnace_generator_sides"
+  }
+}
