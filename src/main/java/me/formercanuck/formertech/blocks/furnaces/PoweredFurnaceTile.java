@@ -3,6 +3,7 @@ package me.formercanuck.formertech.blocks.furnaces;
 import me.formercanuck.formertech.blocks.BaseOre;
 import me.formercanuck.formertech.blocks.ModBlocks;
 import me.formercanuck.formertech.items.BaseIngot;
+import me.formercanuck.formertech.items.BaseOreDust;
 import me.formercanuck.formertech.items.ModItems;
 import me.formercanuck.formertech.tools.CustomEnergyMachine;
 import net.minecraft.block.Block;
@@ -11,6 +12,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -62,7 +64,7 @@ public class PoweredFurnaceTile extends TileEntity implements ITickableTileEntit
                             System.out.println(String.format("TimeCooked: %s, CookTime: %s", timeCooked, cookTime));
                             if (timeCooked == cookTime) {
                                 h.extractItem(0, 1, false);
-                                h.insertItem(1, getResult(Block.getBlockFromItem(stack.getItem())), false);
+                                h.insertItem(1, getResult(stack), false);
                                 markDirty();
                                 timeCooked = 0;
                             }
@@ -86,17 +88,18 @@ public class PoweredFurnaceTile extends TileEntity implements ITickableTileEntit
         return false;
     }
 
-    private ItemStack getResult(Block block) {
-        if (block == ModBlocks.COPPERORE) {
+    private ItemStack getResult(ItemStack stack) {
+
+        if (stack.getItem() == Item.getItemFromBlock(ModBlocks.COPPERORE) || stack.getItem() == ModItems.COPPERDUST) {
             return new ItemStack(ModItems.COPPERINGOT, 1);
         }
-        if (block == ModBlocks.LEADORE) {
+        if (stack.getItem() == Item.getItemFromBlock(ModBlocks.LEADORE) || stack.getItem() == ModItems.LEADDUST) {
             return new ItemStack(ModItems.LEADINGOT, 1);
         }
-        if (block == ModBlocks.SILVERORE) {
+        if (stack.getItem() == Item.getItemFromBlock(ModBlocks.SILVERORE) || stack.getItem() == ModItems.SILVERDUST) {
             return new ItemStack(ModItems.SILVERINGOT, 1);
         }
-        if (block == ModBlocks.TINORE) {
+        if (stack.getItem() == Item.getItemFromBlock(ModBlocks.TINORE) || stack.getItem() == ModItems.TINDUST) {
             return new ItemStack(ModItems.TININGOT, 1);
         }
         return null;
@@ -135,7 +138,7 @@ public class PoweredFurnaceTile extends TileEntity implements ITickableTileEntit
             @Override
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
                 if (slot == 0)
-                    return Block.getBlockFromItem(stack.getItem()) instanceof BaseOre;
+                    return Block.getBlockFromItem(stack.getItem()) instanceof BaseOre || stack.getItem() instanceof BaseOreDust;
                 if (slot == 1)
                     return stack.getItem() instanceof BaseIngot;
                 return false;

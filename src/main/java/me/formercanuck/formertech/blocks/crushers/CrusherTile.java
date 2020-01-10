@@ -3,6 +3,7 @@ package me.formercanuck.formertech.blocks.crushers;
 import me.formercanuck.formertech.blocks.BaseOre;
 import me.formercanuck.formertech.blocks.ModBlocks;
 import me.formercanuck.formertech.items.BaseIngot;
+import me.formercanuck.formertech.items.BaseOreDust;
 import me.formercanuck.formertech.items.ModItems;
 import me.formercanuck.formertech.tools.CustomEnergyMachine;
 import net.minecraft.block.Block;
@@ -59,6 +60,7 @@ public class CrusherTile extends TileEntity implements ITickableTileEntity, INam
                         if (timeCooked < cookTime) {
                             timeCooked++;
                             ((CustomEnergyMachine) e).consumeEnergy(energyPerTick);
+                            markDirty();
                             System.out.println(String.format("TimeCooked: %s, CookTime: %s", timeCooked, cookTime));
                             if (timeCooked == cookTime) {
                                 h.extractItem(0, 1, false);
@@ -88,16 +90,16 @@ public class CrusherTile extends TileEntity implements ITickableTileEntity, INam
 
     private ItemStack getResult(Block block) {
         if (block == ModBlocks.COPPERORE) {
-            return new ItemStack(ModItems.COPPERINGOT, 2);
+            return new ItemStack(ModItems.COPPERDUST, 2);
         }
         if (block == ModBlocks.LEADORE) {
-            return new ItemStack(ModItems.LEADINGOT, 2);
+            return new ItemStack(ModItems.LEADDUST, 2);
         }
         if (block == ModBlocks.SILVERORE) {
-            return new ItemStack(ModItems.SILVERINGOT, 2);
+            return new ItemStack(ModItems.SILVERDUST, 2);
         }
         if (block == ModBlocks.TINORE) {
-            return new ItemStack(ModItems.TININGOT, 2);
+            return new ItemStack(ModItems.TINDUST, 2);
         }
         return null;
     }
@@ -137,7 +139,7 @@ public class CrusherTile extends TileEntity implements ITickableTileEntity, INam
                 if (slot == 0)
                     return Block.getBlockFromItem(stack.getItem()) instanceof BaseOre;
                 if (slot == 1)
-                    return stack.getItem() instanceof BaseIngot;
+                    return stack.getItem() instanceof BaseOreDust;
                 return false;
             }
 

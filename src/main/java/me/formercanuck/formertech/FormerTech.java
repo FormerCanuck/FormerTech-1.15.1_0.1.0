@@ -84,16 +84,22 @@ public class FormerTech {
             registerBlockItem(ModBlocks.COPPERBLOCK, itemRegistryEvent);
             registerBlockItem(ModBlocks.COPPERORE, itemRegistryEvent);
             itemRegistryEvent.getRegistry().register(ModItems.COPPERINGOT);
+            itemRegistryEvent.getRegistry().register(ModItems.COPPERDUST);
 
             registerBlockItem(ModBlocks.TINBLOCK, itemRegistryEvent);
             registerBlockItem(ModBlocks.TINORE, itemRegistryEvent);
             itemRegistryEvent.getRegistry().register(ModItems.TININGOT);
+            itemRegistryEvent.getRegistry().register(ModItems.TINDUST);
 
             registerBlockItem(ModBlocks.SILVERBLOCK, itemRegistryEvent);
             registerBlockItem(ModBlocks.SILVERORE, itemRegistryEvent);
+            itemRegistryEvent.getRegistry().register(ModItems.SILVERINGOT);
+            itemRegistryEvent.getRegistry().register(ModItems.SILVERDUST);
 
             registerBlockItem(ModBlocks.LEADBLOCK, itemRegistryEvent);
             registerBlockItem(ModBlocks.LEADORE, itemRegistryEvent);
+            itemRegistryEvent.getRegistry().register(ModItems.LEADINGOT);
+            itemRegistryEvent.getRegistry().register(ModItems.LEADDUST);
 
             registerBlockItem(ModBlocks.CRUSHERBLOCK, itemRegistryEvent);
             registerBlockItem(ModBlocks.POWEREDFURNACE, itemRegistryEvent);
