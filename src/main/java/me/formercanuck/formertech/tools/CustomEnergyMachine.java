@@ -1,18 +1,23 @@
 package me.formercanuck.formertech.tools;
 
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.energy.EnergyStorage;
 
 public class CustomEnergyMachine extends EnergyStorage implements INBTSerializable<CompoundNBT> {
 
-    public CustomEnergyMachine(int capacity, int maxTransfer) {
+    private TileEntity tileEntity;
+
+    public CustomEnergyMachine(int capacity, int maxTransfer, TileEntity tileEntity) {
         super(capacity, maxTransfer);
         maxReceive = 100;
+        this.tileEntity = tileEntity;
     }
 
     public void setEnergy(int energy) {
         this.energy = energy;
+        tileEntity.markDirty();
     }
 
     public void addEnergy(int energy) {
@@ -20,6 +25,7 @@ public class CustomEnergyMachine extends EnergyStorage implements INBTSerializab
         if (this.energy > getMaxEnergyStored()) {
             this.energy = getEnergyStored();
         }
+        tileEntity.markDirty();
     }
 
     public void consumeEnergy(int energy) {
@@ -27,6 +33,7 @@ public class CustomEnergyMachine extends EnergyStorage implements INBTSerializab
         if (this.energy < 0) {
             this.energy = 0;
         }
+        tileEntity.markDirty();
     }
 
     @Override

@@ -2,12 +2,12 @@ package me.formercanuck.formertech.blocks.crushers;
 
 import me.formercanuck.formertech.blocks.BaseOre;
 import me.formercanuck.formertech.blocks.ModBlocks;
-import me.formercanuck.formertech.items.BaseIngot;
 import me.formercanuck.formertech.items.BaseOreDust;
 import me.formercanuck.formertech.items.ModItems;
 import me.formercanuck.formertech.tools.CustomEnergyMachine;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -20,6 +20,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
@@ -101,6 +102,12 @@ public class CrusherTile extends TileEntity implements ITickableTileEntity, INam
         if (block == ModBlocks.TINORE) {
             return new ItemStack(ModItems.TINDUST, 2);
         }
+        if (block == Blocks.GOLD_ORE) {
+            return new ItemStack(ModItems.GOLDDUST, 2);
+        }
+        if (block == Blocks.IRON_ORE) {
+            return new ItemStack(ModItems.IRONDUST, 2);
+        }
         return null;
     }
 
@@ -137,7 +144,8 @@ public class CrusherTile extends TileEntity implements ITickableTileEntity, INam
             @Override
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
                 if (slot == 0)
-                    return Block.getBlockFromItem(stack.getItem()) instanceof BaseOre;
+//                    return Block.getBlockFromItem(stack.getItem()) instanceof BaseOre;
+                    return Tags.Blocks.ORES.contains(Block.getBlockFromItem(stack.getItem()));
                 if (slot == 1)
                     return stack.getItem() instanceof BaseOreDust;
                 return false;
@@ -166,7 +174,7 @@ public class CrusherTile extends TileEntity implements ITickableTileEntity, INam
     }
 
     private IEnergyStorage createEnergy() {
-        return new CustomEnergyMachine(100000, 0);
+        return new CustomEnergyMachine(100000, 0, this);
     } // TODO: Add config options
 
     @Override

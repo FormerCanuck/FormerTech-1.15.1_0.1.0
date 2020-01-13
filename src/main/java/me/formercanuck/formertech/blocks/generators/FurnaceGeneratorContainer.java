@@ -49,6 +49,7 @@ public class FurnaceGeneratorContainer extends Container {
             @Override
             public void set(int i) {
                 tileEntity.getCapability(CapabilityEnergy.ENERGY).ifPresent(h -> ((CustomEnergyStorage) h).setEnergy(i));
+                tileEntity.markDirty();
             }
         });
     }

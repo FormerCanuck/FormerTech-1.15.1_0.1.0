@@ -44,6 +44,7 @@ public class PoweredFurnaceContainer extends Container {
             @Override
             public void set(int i) {
                 tileEntity.getCapability(CapabilityEnergy.ENERGY).ifPresent(h -> ((CustomEnergyMachine) h).setEnergy(i));
+                tileEntity.markDirty();
             }
         });
 

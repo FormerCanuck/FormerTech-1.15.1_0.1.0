@@ -167,7 +167,7 @@ public class PoweredFurnaceTile extends TileEntity implements ITickableTileEntit
     }
 
     private IEnergyStorage createEnergy() {
-        return new CustomEnergyMachine(100000, 0);
+        return new CustomEnergyMachine(100000, 0, this);
     } // TODO: Add config options
 
     @Override

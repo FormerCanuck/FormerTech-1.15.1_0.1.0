@@ -44,6 +44,7 @@ public class CrusherContainer extends Container {
             @Override
             public void set(int i) {
                 tileEntity.getCapability(CapabilityEnergy.ENERGY).ifPresent(h -> ((CustomEnergyMachine) h).setEnergy(i));
+                tileEntity.markDirty();
             }
         });
 
@@ -78,7 +79,7 @@ public class CrusherContainer extends Container {
                 }
                 slot.onSlotChange(stack, itemstack);
             } else {
-                if (Block.getBlockFromItem(stack.getItem()) instanceof BaseOre) {
+                if (!(Block.getBlockFromItem(stack.getItem()) instanceof BaseOre)) {
                     if (!this.mergeItemStack(stack, 0, 1, false)) {
                         return ItemStack.EMPTY;
                     }

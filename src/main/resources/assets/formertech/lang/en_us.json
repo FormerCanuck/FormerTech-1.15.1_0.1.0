@@ -14,11 +14,19 @@
   "block.formertech.leadore": "Lead Ore",
   
   "block.formertech.crusherblock": "Crusher",
+  "block.formertech.poweredfurnace": "Powered Furnace",
   "block.formertech.furnacegenerator": "Furnace Generator",
 
   "_comment": "Items",
   "item.formertech.copperingot": "Copper Ingot",
   "item.formertech.tiningot": "Tin Ingot",
+  "item.formertech.leadingot": "Lead Ingot",
+  "item.formertech.silveringot": "Silver Ingot",
+
+  "item.formertech.copperdust": "Copper Dust",
+  "item.formertech.tindust": "Tin Dust",
+  "item.formertech.leaddust": "Lead Dust",
+  "item.formertech.silverdust": "Silver Dust",
 
   "_comment": "Creative Tabs",
   "itemGroup.formertech": "FormerTech"

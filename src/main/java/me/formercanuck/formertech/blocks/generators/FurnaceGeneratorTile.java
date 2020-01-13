@@ -190,7 +190,7 @@ public class FurnaceGeneratorTile extends TileEntity implements ITickableTileEnt
     }
 
     private IEnergyStorage createEnergy() {
-        return new CustomEnergyStorage(Config.FURNACEGENERATOR_MAXPOWER.get(), 0);
+        return new CustomEnergyStorage(Config.FURNACEGENERATOR_MAXPOWER.get(), 0, this);
     }
 
     @Nonnull

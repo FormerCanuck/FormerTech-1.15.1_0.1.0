@@ -23,4 +23,9 @@ public class ModItems {
     public static BaseIngot SILVERINGOT = new BaseIngot("silveringot");
     @ObjectHolder("formertech:silverdust")
     public static BaseOreDust SILVERDUST = new BaseOreDust("silverdust");
+
+    @ObjectHolder("formertech:golddust")
+    public static BaseOreDust GOLDDUST = new BaseOreDust("golddust");
+    @ObjectHolder("formertech:irondust")
+    public static BaseOreDust IRONDUST = new BaseOreDust("irondust");
 }

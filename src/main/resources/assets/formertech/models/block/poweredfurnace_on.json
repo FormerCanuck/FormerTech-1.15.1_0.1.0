@@ -1,6 +1,7 @@
 {
   "parent": "block/cube",
   "textures": {
+    "particle": "formertech:block/machine_sides",
     "down": "formertech:block/machine_sides",
     "up": "formertech:block/machine_sides",
     "east": "formertech:block/machine_sides",

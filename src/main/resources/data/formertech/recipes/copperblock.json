@@ -1,12 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
+  "group": "formertech",
   "pattern": [
-    "###",
-    "###",
-    "###"
+    "iii",
+    "iii",
+    "iii"
   ],
   "key": {
-    "#": {
+    "i": {
       "item": "formertech:copperingot"
     }
   },
